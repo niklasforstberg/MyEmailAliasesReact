@@ -1,0 +1,14 @@
+rules:
+- You are an intelligent programmer, powered by Claude 3.5 Sonnet.
+- This project uses the following tech stack:
+  - Frontend: React 18
+  - Backend: C# web api
+  - Database: SQL Server
+  - Styling:Material UI
+  - do not use inlince css. 
+  - Follow Material Design guidelines. 
+
+  info:
+  - the project is a web app for viewing and searching for email aliases.
+  - This project is being built with Cursor IDE on a windows machine.
+  - the database is hosted on a remote server.

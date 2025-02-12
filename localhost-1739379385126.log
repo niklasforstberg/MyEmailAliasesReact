@@ -1,0 +1,32 @@
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
+react-dom-client.development.js:24594 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+AuthContext.jsx:22 Attempting login with: {email: 'nik@nik.se', password: 'nik'}
+AuthContext.jsx:27 Login response: {data: {…}, status: 200, statusText: 'OK', headers: AxiosHeaders, config: {…}, …}
+EmailAliasList.jsx:15 Starting alias fetch...
+EmailAliasList.jsx:16 Auth token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuaWtAbmlrLnNlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVVNFUiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMiIsImV4cCI6MTczOTQ2NTc3MCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE1MSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNTEifQ.UzGWEsxM-WxWeagWQtuCmyh3FKUrqXzVhVljvLx1OdQ
+EmailAliasList.jsx:15 Starting alias fetch...
+EmailAliasList.jsx:16 Auth token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuaWtAbmlrLnNlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVVNFUiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMiIsImV4cCI6MTczOTQ2NTc3MCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE1MSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNTEifQ.UzGWEsxM-WxWeagWQtuCmyh3FKUrqXzVhVljvLx1OdQ
+EmailAliasList.jsx:25 Raw response: {data: Array(0), status: 200, statusText: 'OK', headers: AxiosHeaders, config: {…}, …}
+EmailAliasList.jsx:28 Aliases data: []
+EmailAliasList.jsx:25 Raw response: {data: Array(0), status: 200, statusText: 'OK', headers: AxiosHeaders, config: {…}, …}config: {transitional: {…}, adapter: Array(3), transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}data: []headers: AxiosHeaders {content-type: 'application/json; charset=utf-8'}request: XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, …}status: 200statusText: "OK"[[Prototype]]: Object
+EmailAliasList.jsx:28 Aliases data: []
