@@ -79,7 +79,7 @@ function EmailAliasList() {
   }
 
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', mt: 3, p: 2 }}>
+    <Box className="aliases-container">
       <TextField
         fullWidth
         variant="outlined"
@@ -100,33 +100,30 @@ function EmailAliasList() {
           boxShadow: 'none',
           bgcolor: 'transparent'
         }}>
-          {filteredAliases.map((alias) => {
-            console.log('Rendering alias:', alias);
-            return (
-              <Box key={alias.id}>
-                <ListItem disablePadding>
-                  <ListItemButton 
-                    onClick={() => setExpandedAliasId(
-                      expandedAliasId === alias.id ? null : alias.id
-                    )}
-                  >
-                    <ListItemText primary={alias.alias} />
-                    {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
-                  </ListItemButton>
-                </ListItem>
-                <Collapse in={expandedAliasId === alias.id} timeout="auto">
-                  <Box sx={{ p: 2, pl: 4 }}>
-                    <Typography>
-                      Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
-                    </Typography>
-                    <Typography>
-                      Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
-                    </Typography>
-                  </Box>
-                </Collapse>
-              </Box>
-            );
-          })}
+          {filteredAliases.map((alias) => (
+            <Box key={alias.id}>
+              <ListItem disablePadding>
+                <ListItemButton 
+                  onClick={() => setExpandedAliasId(
+                    expandedAliasId === alias.id ? null : alias.id
+                  )}
+                >
+                  <ListItemText primary={alias.alias} />
+                  {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+              </ListItem>
+              <Collapse in={expandedAliasId === alias.id} timeout="auto">
+                <Box sx={{ p: 2, pl: 4 }}>
+                  <Typography>
+                    Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
+                  </Typography>
+                  <Typography>
+                    Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
+                  </Typography>
+                </Box>
+              </Collapse>
+            </Box>
+          ))}
         </List>
       )}
     </Box>
