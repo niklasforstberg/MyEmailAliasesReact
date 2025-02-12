@@ -34,7 +34,9 @@ function EmailAliasList() {
           }
         });
         
+        console.log('Raw response:', response);
         if (response.data) {
+          console.log('Aliases data:', response.data);
           setAliases(response.data);
         }
       } catch (error) {
@@ -45,6 +47,8 @@ function EmailAliasList() {
     };
 
     if (user?.token) {
+      console.log('Starting alias fetch...');
+      console.log('Auth token:', user.token);
       fetchAliases();
     }
   }, [user]);
@@ -83,28 +87,33 @@ function EmailAliasList() {
           boxShadow: 'none',
           bgcolor: 'transparent'
         }}>
-          {aliases.map((alias) => (
-            <Box key={alias.id}>
-              <ListItem disablePadding>
-                <ListItemButton 
-                  onClick={() => setExpandedAliasId(
-                    expandedAliasId === alias.id ? null : alias.id
-                  )}
-                >
-                  <ListItemText primary={alias.alias} />
-                  {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-              </ListItem>
-              <Collapse in={expandedAliasId === alias.id} timeout="auto">
-                <Box sx={{ p: 2, pl: 4 }}>
-                  <Typography>Forward To: {alias.forwardTo}</Typography>
-                  <Typography>
-                    Status: {alias.isEnabled ? 'Active' : 'Inactive'}
-                  </Typography>
-                </Box>
-              </Collapse>
-            </Box>
-          ))}
+          {aliases.map((alias) => {
+            console.log('Rendering alias:', alias);
+            return (
+              <Box key={alias.id}>
+                <ListItem disablePadding>
+                  <ListItemButton 
+                    onClick={() => setExpandedAliasId(
+                      expandedAliasId === alias.id ? null : alias.id
+                    )}
+                  >
+                    <ListItemText primary={alias.alias} />
+                    {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                </ListItem>
+                <Collapse in={expandedAliasId === alias.id} timeout="auto">
+                  <Box sx={{ p: 2, pl: 4 }}>
+                    <Typography>
+                      Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
+                    </Typography>
+                    <Typography>
+                      Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
+                    </Typography>
+                  </Box>
+                </Collapse>
+              </Box>
+            );
+          })}
         </List>
       )}
     </Box>
