@@ -7,7 +7,6 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
   Collapse,
   Paper,
   CircularProgress,
@@ -18,6 +17,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
+import React from 'react';
 
 function EmailAliasList() {
   const [aliases, setAliases] = useState([]);
@@ -119,21 +119,29 @@ function EmailAliasList() {
               <Box key={alias.id}>
                 <ListItem disablePadding>
                   <ListItemButton 
-                    onClick={() => setExpandedAliasId(
-                      expandedAliasId === alias.id ? null : alias.id
-                    )}
+                    disableRipple
+                    sx={{ userSelect: 'text' }}
+                    onClick={(e) => {
+                      if (window.getSelection().toString() === '') {
+                        setExpandedAliasId(expandedAliasId === alias.id ? null : alias.id)
+                      }
+                    }}
                   >
-                    <ListItemText primary={alias.alias} />
+                    <Typography sx={{ flex: 1 }}>{alias.alias}</Typography>
                     {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
                 </ListItem>
                 <Collapse in={expandedAliasId === alias.id} timeout="auto">
                   <Box sx={{ p: 2, pl: 4 }}>
                     <Typography>
-                      Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
-                    </Typography>
-                    <Typography>
-                      Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
+                      {alias.forwardingAddresses?.map((fa, index) => (
+                        <React.Fragment key={fa.id}>
+                          ⟶ {fa.forwardingAddress}
+                          {index < alias.forwardingAddresses.length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
+                      {' • '}
+                      {alias.status === 'ACTIVE' ? 'active' : 'inactive'}
                     </Typography>
                   </Box>
                 </Collapse>
