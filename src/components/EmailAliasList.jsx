@@ -12,8 +12,10 @@ import {
   Paper,
   CircularProgress,
   Alert,
-  TextField
+  TextField,
+  InputAdornment
 } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 
@@ -82,50 +84,64 @@ function EmailAliasList() {
     <Box className="aliases-container">
       <TextField
         fullWidth
-        variant="outlined"
+        variant="standard"
         placeholder="Search aliases..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        sx={{ mb: 3 }}
+        sx={{ 
+          mb: 3,
+          '& .MuiInput-underline:before': {
+            borderBottom: '2px solid rgba(0, 0, 0, 0.42)'
+          }
+        }}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }
+        }}
       />
       
-      {filteredAliases.length === 0 ? (
-        <Paper sx={{ p: 3, textAlign: 'center' }}>
-          <Typography>
+      <Paper sx={{ 
+        boxShadow: 'none',
+        bgcolor: 'transparent'
+      }}>
+        {filteredAliases.length === 0 ? (
+          <Typography sx={{ p: 2 }}>
             {searchQuery ? 'No matching aliases found' : 'No aliases found. Create your first alias!'}
           </Typography>
-        </Paper>
-      ) : (
-        <List component={Paper} sx={{ 
-          boxShadow: 'none',
-          bgcolor: 'transparent'
-        }}>
-          {filteredAliases.map((alias) => (
-            <Box key={alias.id}>
-              <ListItem disablePadding>
-                <ListItemButton 
-                  onClick={() => setExpandedAliasId(
-                    expandedAliasId === alias.id ? null : alias.id
-                  )}
-                >
-                  <ListItemText primary={alias.alias} />
-                  {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-              </ListItem>
-              <Collapse in={expandedAliasId === alias.id} timeout="auto">
-                <Box sx={{ p: 2, pl: 4 }}>
-                  <Typography>
-                    Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
-                  </Typography>
-                  <Typography>
-                    Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
-                  </Typography>
-                </Box>
-              </Collapse>
-            </Box>
-          ))}
-        </List>
-      )}
+        ) : (
+          <List sx={{ p: 0 }}>
+            {filteredAliases.map((alias) => (
+              <Box key={alias.id}>
+                <ListItem disablePadding>
+                  <ListItemButton 
+                    onClick={() => setExpandedAliasId(
+                      expandedAliasId === alias.id ? null : alias.id
+                    )}
+                  >
+                    <ListItemText primary={alias.alias} />
+                    {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                </ListItem>
+                <Collapse in={expandedAliasId === alias.id} timeout="auto">
+                  <Box sx={{ p: 2, pl: 4 }}>
+                    <Typography>
+                      Forward To: {alias.forwardingAddresses?.map(fa => fa.forwardingAddress).join(', ')}
+                    </Typography>
+                    <Typography>
+                      Status: {alias.status === 'ACTIVE' ? 'Active' : 'Inactive'}
+                    </Typography>
+                  </Box>
+                </Collapse>
+              </Box>
+            ))}
+          </List>
+        )}
+      </Paper>
     </Box>
   );
 }
