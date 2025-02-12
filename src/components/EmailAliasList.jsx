@@ -11,7 +11,8 @@ import {
   Collapse,
   Paper,
   CircularProgress,
-  Alert
+  Alert,
+  TextField
 } from '@mui/material';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -21,6 +22,7 @@ function EmailAliasList() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [expandedAliasId, setExpandedAliasId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuth();
 
   useEffect(() => {
@@ -53,6 +55,10 @@ function EmailAliasList() {
     }
   }, [user]);
 
+  const filteredAliases = aliases.filter(alias =>
+    alias.alias.toLowerCase().startsWith(searchQuery.toLowerCase())
+  );
+
   if (isLoading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
@@ -74,20 +80,27 @@ function EmailAliasList() {
 
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', mt: 3, p: 2 }}>
-      <Typography variant="h4" sx={{ mb: 3 }}>
-        Your Email Aliases
-      </Typography>
+      <TextField
+        fullWidth
+        variant="outlined"
+        placeholder="Search aliases..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        sx={{ mb: 3 }}
+      />
       
-      {aliases.length === 0 ? (
+      {filteredAliases.length === 0 ? (
         <Paper sx={{ p: 3, textAlign: 'center' }}>
-          <Typography>No aliases found. Create your first alias!</Typography>
+          <Typography>
+            {searchQuery ? 'No matching aliases found' : 'No aliases found. Create your first alias!'}
+          </Typography>
         </Paper>
       ) : (
         <List component={Paper} sx={{ 
           boxShadow: 'none',
           bgcolor: 'transparent'
         }}>
-          {aliases.map((alias) => {
+          {filteredAliases.map((alias) => {
             console.log('Rendering alias:', alias);
             return (
               <Box key={alias.id}>
