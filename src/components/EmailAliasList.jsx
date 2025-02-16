@@ -15,8 +15,7 @@ import {
   InputAdornment
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import ExpandLess from '@mui/icons-material/ExpandLess';
+import { KeyboardArrowRight, KeyboardArrowDown, ExpandLess, ExpandMore } from '@mui/icons-material';
 import React from 'react';
 
 function EmailAliasList() {
@@ -117,18 +116,38 @@ function EmailAliasList() {
           <List sx={{ p: 0 }}>
             {filteredAliases.map((alias) => (
               <Box key={alias.id}>
-                <ListItem disablePadding>
+                <ListItem disablePadding sx={{ minHeight: 0 }}>
                   <ListItemButton 
                     disableRipple
-                    sx={{ userSelect: 'text' }}
-                    onClick={(e) => {
-                      if (window.getSelection().toString() === '') {
-                        setExpandedAliasId(expandedAliasId === alias.id ? null : alias.id)
+                    sx={{ 
+                      p: 0,
+                      minHeight: 0,
+                      '&:hover': {
+                        background: 'none'
                       }
                     }}
                   >
-                    <Typography sx={{ flex: 1 }}>{alias.alias}</Typography>
-                    {expandedAliasId === alias.id ? <ExpandLess /> : <ExpandMore />}
+                    <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
+                      <Box
+                        onClick={() => setExpandedAliasId(expandedAliasId === alias.id ? null : alias.id)}
+                        sx={{ 
+                          cursor: 'pointer',
+                          py: 0.5,
+                          px: 1,
+                          display: 'flex',
+                          alignItems: 'center'
+                        }}
+                      >
+                        {expandedAliasId === alias.id ? <KeyboardArrowDown /> : <KeyboardArrowRight />}
+                      </Box>
+                      <Typography sx={{ 
+                        flex: 1, 
+                        cursor: 'text',
+                        userSelect: 'text'
+                      }}>
+                        {alias.alias}
+                      </Typography>
+                    </Box>
                   </ListItemButton>
                 </ListItem>
                 <Collapse in={expandedAliasId === alias.id} timeout="auto">
