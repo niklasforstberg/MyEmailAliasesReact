@@ -12,11 +12,14 @@ import {
   CircularProgress,
   Alert,
   TextField,
-  InputAdornment
+  InputAdornment,
+  IconButton,
+  Tooltip
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { KeyboardArrowRight, KeyboardArrowDown, ExpandLess, ExpandMore } from '@mui/icons-material';
 import React from 'react';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 function EmailAliasList() {
   const [aliases, setAliases] = useState([]);
@@ -25,6 +28,7 @@ function EmailAliasList() {
   const [expandedAliasId, setExpandedAliasId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuth();
+  const [copiedId, setCopiedId] = useState(null);
 
   useEffect(() => {
     const fetchAliases = async () => {
@@ -59,6 +63,16 @@ function EmailAliasList() {
   const filteredAliases = aliases.filter(alias =>
     alias.alias.toLowerCase().startsWith(searchQuery.toLowerCase())
   );
+
+  const handleCopy = async (alias) => {
+    try {
+      await navigator.clipboard.writeText(alias);
+      setCopiedId(alias);
+      setTimeout(() => setCopiedId(null), 2000); // Reset after 2 seconds
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -147,6 +161,21 @@ function EmailAliasList() {
                       }}>
                         {alias.alias}
                       </Typography>
+                      <Tooltip title={copiedId === alias.alias ? "Copied!" : "Copy to clipboard"}>
+                        <IconButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCopy(alias.alias);
+                          }}
+                          size="small"
+                          sx={{
+                            mr: 1,
+                            color: copiedId === alias.alias ? 'success.main' : 'action.active'
+                          }}
+                        >
+                          <ContentCopyIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
                     </Box>
                   </ListItemButton>
                 </ListItem>
