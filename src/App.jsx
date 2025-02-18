@@ -5,6 +5,7 @@ import { useAuth } from './context/AuthContext';
 import './App.css'
 import AccountInfo from './components/AccountInfo';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -14,6 +15,7 @@ function PrivateRoute({ children }) {
 function MenuBar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -23,13 +25,19 @@ function MenuBar() {
   return (
     <nav className="top-nav">
       <div className="menu-container">
-        <button className="menu-button" aria-label="Menu">
+        <button 
+          className="menu-button" 
+          aria-label="Menu"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           <span className="hamburger-icon">☰</span>
         </button>
-        <div className="menu-dropdown">
-          <button onClick={handleLogout}>Log out</button>
-          <button onClick={() => navigate('/account')}>Account info</button>
-        </div>
+        {isMenuOpen && (
+          <div className="menu-dropdown">
+            <button onClick={handleLogout}>Log out</button>
+            <button onClick={() => navigate('/account')}>Account info</button>
+          </div>
+        )}
       </div>
     </nav>
   );
