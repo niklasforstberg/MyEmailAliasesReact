@@ -23,7 +23,9 @@ function MenuBar() {
   return (
     <nav className="top-nav">
       <div className="menu-container">
-        <button className="menu-button">Menu</button>
+        <button className="menu-button" aria-label="Menu">
+          <span className="hamburger-icon">☰</span>
+        </button>
         <div className="menu-dropdown">
           <button onClick={handleLogout}>Log out</button>
           <button onClick={() => navigate('/account')}>Account info</button>

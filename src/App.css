@@ -100,11 +100,15 @@ html {
 }
 
 .menu-button {
-  padding: 0.5rem 1rem;
-  background: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 8px;
+}
+
+.hamburger-icon {
+  font-size: 24px;
+  line-height: 1;
 }
 
 .menu-dropdown {
