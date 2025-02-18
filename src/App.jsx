@@ -1,33 +1,63 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import EmailAliasList from './components/EmailAliasList';
 import { useAuth } from './context/AuthContext';
 import './App.css'
+import AccountInfo from './components/AccountInfo';
+import { useNavigate } from 'react-router-dom';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 }
 
+function MenuBar() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  return (
+    <nav className="top-nav">
+      <div className="menu-container">
+        <button className="menu-button">Menu</button>
+        <div className="menu-dropdown">
+          <button onClick={handleLogout}>Log out</button>
+          <button onClick={() => navigate('/account')}>Account info</button>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route 
-            path="/aliases" 
-            element={
-              <PrivateRoute>
-                <EmailAliasList />
-              </PrivateRoute>
-            } 
-          />
-          <Route path="/" element={<Navigate to="/login" />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <div className="app-container">
+      <MenuBar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route 
+          path="/aliases" 
+          element={
+            <PrivateRoute>
+              <EmailAliasList />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route 
+          path="/account" 
+          element={
+            <PrivateRoute>
+              <AccountInfo />
+            </PrivateRoute>
+          } 
+        />
+      </Routes>
+    </div>
   );
 }
 
