@@ -170,7 +170,14 @@ function EmailAliasList() {
                           size="small"
                           sx={{
                             mr: 1,
-                            color: copiedId === alias.alias ? 'success.main' : 'action.active'
+                            color: copiedId === alias.alias ? 'success.main' : 'action.active',
+                            opacity: 0,
+                            '&:hover': {
+                              opacity: 1
+                            },
+                            '.MuiListItem-root:hover &': {
+                              opacity: 1
+                            }
                           }}
                         >
                           <ContentCopyIcon fontSize="small" />
